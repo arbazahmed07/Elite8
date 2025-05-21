@@ -4,7 +4,7 @@ import PageTransition from '../components/layout/PageTransition';
 import Hero from '../components/home/Hero';
 import FeaturedProjects from '../components/home/FeaturedProjects';
 import AboutSection from '../components/home/About';
-import ContactSection from '../components/home/Contact';
+import ContactSection from '../pages/Contact';
 import Navbar from '../components/navbar/Navbar';
 import Footer from '../components/layout/Footer';
 

@@ -1,0 +1,246 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 10% 4%;
+    --foreground: 0 0% 95%;
+
+    --card: 240 10% 6%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 240 10% 4%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 255 80% 65%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 240 5% 12%;
+    --secondary-foreground: 0 0% 95%;
+
+    --muted: 240 5% 20%;
+    --muted-foreground: 0 0% 70%;
+
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 5% 26%;
+    --input: 240 5% 26%;
+    --ring: 255 80% 65%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 240 10% 4%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 255 80% 65%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 5% 12%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 240 5% 26%;
+    --sidebar-ring: 217 91% 60%;
+  }
+
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+
+    --card: 0 0% 98%;
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    --primary: 255 70% 55%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 255 70% 55%;
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 240 10% 3.9%;
+    --sidebar-primary: 255 70% 55%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 240 5.9% 90%;
+    --sidebar-ring: 217 91% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground overflow-x-hidden;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tighter;
+  }
+
+  h1 {
+    @apply text-4xl sm:text-5xl md:text-6xl lg:text-7xl;
+  }
+
+  h2 {
+    @apply text-3xl sm:text-4xl md:text-5xl;
+  }
+
+  h3 {
+    @apply text-2xl sm:text-3xl;
+  }
+
+  .animated-link {
+    @apply relative inline-block overflow-hidden;
+  }
+
+  .animated-link::after {
+    @apply content-[''] absolute w-full h-[2px] bg-primary -bottom-0 left-0 transform -translate-x-full transition-transform duration-300;
+  }
+
+  .animated-link:hover::after {
+    @apply transform translate-x-0;
+  }
+  
+  .reveal {
+    @apply opacity-0 translate-y-10 transition-all duration-700;
+  }
+  
+  .reveal.active {
+    @apply opacity-100 translate-y-0;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Theme transition */
+  *, ::before, ::after {
+    @apply transition-colors duration-300;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary));
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* For cursor effect */
+.cursor-dot {
+  width: 5px;
+  height: 5px;
+  background-color: hsl(var(--primary));
+  transition: transform 0.1s ease;
+}
+
+.cursor-outline {
+  width: 30px;
+  height: 30px;
+  border: 2px solid hsla(var(--primary), 0.5);
+  transition: width 0.3s ease, height 0.3s ease, transform 0.1s ease;
+}
+
+.cursor-dot,
+.cursor-outline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  z-index: 999;
+  pointer-events: none;
+}
+
+/* Add cursor trailing effect */
+.cursor-trail {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: hsla(var(--primary), 0.3);
+  z-index: 998;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+/* Skeleton loader */
+.skeleton {
+  @apply bg-muted/20 animate-pulse rounded-md;
+}
+
+/* Loading spinner */
+.loading-spinner {
+  @apply w-8 h-8 border-4 border-primary/20 border-t-primary rounded-full animate-spin;
+}
+
+/* Tilt effect */
+.tilt-card {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform 0.1s ease;
+}
+
+.tilt-card-content {
+  transform: translateZ(20px);
+}
+
+/* Floating button */
+.floating-button {
+  @apply fixed bottom-6 right-6 p-4 bg-primary rounded-full shadow-lg z-50;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 hsla(var(--primary), 0.7);
+    transform: scale(1);
+  }
+  70% {
+    box-shadow: 0 0 0 10px hsla(var(--primary), 0);
+    transform: scale(1.05);
+  }
+  100% {
+    box-shadow: 0 0 0 0 hsla(var(--primary), 0);
+    transform: scale(1);
+  }
+}
